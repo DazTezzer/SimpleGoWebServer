@@ -1,0 +1,20 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server for GoProject",
+        "title": "GoProject Service",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8081",
+    "basePath": "/",
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Responds with the test answer as JSON.",
+                "summary": "Get Test",
+                "responses": {}
+            }
+        }
+    }
+}

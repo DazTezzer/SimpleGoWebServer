@@ -1,0 +1,14 @@
+basePath: /
+host: localhost:8081
+info:
+  contact: {}
+  description: This is a sample server for GoProject
+  title: GoProject Service
+  version: "1.0"
+paths:
+  /:
+    get:
+      description: Responds with the test answer as JSON.
+      responses: {}
+      summary: Get Test
+swagger: "2.0"
