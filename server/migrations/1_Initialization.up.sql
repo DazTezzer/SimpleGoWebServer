@@ -15,7 +15,7 @@ CREATE TABLE ProductCategory (
 CREATE TABLE ProductImage (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    image BYTEA
+    image VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Customer (

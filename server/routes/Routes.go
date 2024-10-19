@@ -1,7 +1,9 @@
 package routes
 
 import (
-	_ "GoProject/docs"
+	_ "bebeziansback/docs"
+	"bebeziansback/product"
+	"net/http"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -10,14 +12,17 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @title           GoProject Service
-// @version         1.0
-// @description     This is a sample server for GoProject
-// @host            localhost:8081
-// @BasePath        /
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 	r.Use(cors.Default())
+
+	productEndpoints := r.Group("/product")
+	{
+		productEndpoints.GET("/getAllCategory", product.GetAllCategory)
+		productEndpoints.GET("/getPopProducts", product.GetPopProducts)
+		productEndpoints.POST("/getProductsByCategory", product.GetProductsByCategory)
+		productEndpoints.POST("/getProduct", product.GetProductById)
+	}
 
 	r.GET("/", GetTest)
 	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
@@ -27,8 +32,9 @@ func SetupRouter() *gin.Engine {
 // @Summary      Get Test
 // @Description  Responds with the test answer as JSON.
 // @Router       / [get]
+// @Tags Server
 func GetTest(c *gin.Context) {
-	c.JSON(200, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"message": "Hello, World!",
 	})
 }

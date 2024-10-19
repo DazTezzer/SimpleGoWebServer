@@ -11,7 +11,7 @@ import (
 
 func RunMigrations(db *DBConfig) error {
 	dbURL := DbMigrationURL(db)
-	migrationsPath := fmt.Sprintf("file://%s", "./migrations")
+	migrationsPath := fmt.Sprintf("file://%s", "./server/migrations")
 	m, err := migrate.New(
 		migrationsPath,
 		dbURL,

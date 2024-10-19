@@ -18,8 +18,241 @@ const docTemplate = `{
         "/": {
             "get": {
                 "description": "Responds with the test answer as JSON.",
+                "tags": [
+                    "Server"
+                ],
                 "summary": "Get Test",
                 "responses": {}
+            }
+        },
+        "/product/getAllCategory": {
+            "get": {
+                "description": "Get all product categories",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get All Categories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ProductCategoryResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/getPopProducts": {
+            "get": {
+                "description": "Get all Pop Products",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get All Pop Products",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.PopProductsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/getProduct": {
+            "post": {
+                "description": "Get Product by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Product",
+                "parameters": [
+                    {
+                        "description": "Product Id",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ProductRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ProductResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/getProductsByCategory": {
+            "post": {
+                "description": "Get products by category name",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get All Products By Category",
+                "parameters": [
+                    {
+                        "description": "Category Name",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ProductsByCategoryRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ProductsByCategoryResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.ProductDescription": {
+            "type": "object",
+            "properties": {
+                "additional_info": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "material": {
+                    "type": "string"
+                },
+                "size": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.ProductRequest": {
+            "type": "object",
+            "properties": {
+                "productId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "request.ProductsByCategoryRequest": {
+            "type": "object",
+            "properties": {
+                "categoryName": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.Category": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.PopProductsResponse": {
+            "type": "object",
+            "properties": {
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/response.ProductResponsePart"
+                    }
+                }
+            }
+        },
+        "response.ProductCategoryResponse": {
+            "type": "object",
+            "properties": {
+                "categories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/response.Category"
+                    }
+                }
+            }
+        },
+        "response.ProductResponse": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "$ref": "#/definitions/models.ProductDescription"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "productId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "response.ProductResponsePart": {
+            "type": "object",
+            "properties": {
+                "description_info": {
+                    "type": "string"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "productId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "response.ProductsByCategoryResponse": {
+            "type": "object",
+            "properties": {
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/response.ProductResponsePart"
+                    }
+                }
             }
         }
     }
@@ -31,8 +264,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:8081",
 	BasePath:         "/",
 	Schemes:          []string{},
-	Title:            "GoProject Service",
-	Description:      "This is a sample server for GoProject",
+	Title:            "Bebeziansback",
+	Description:      "This is a Bebeziansback",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

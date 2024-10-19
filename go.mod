@@ -1,4 +1,4 @@
-module GoProject
+module bebeziansback
 
 go 1.23.1
 

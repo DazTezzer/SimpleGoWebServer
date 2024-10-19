@@ -1,9 +1,14 @@
+// @title           Bebeziansback
+// @version         1.0
+// @description     This is a Bebeziansback
+// @host            localhost:8081
+// @BasePath        /
 package main
 
 import (
-	"GoProject/config"
-	_ "GoProject/docs"
-	"GoProject/routes"
+	_ "bebeziansback/docs"
+	"bebeziansback/server/config"
+	"bebeziansback/server/routes"
 	"log"
 
 	"gorm.io/driver/postgres"

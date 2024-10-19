@@ -1,9 +1,87 @@
 basePath: /
+definitions:
+  models.ProductDescription:
+    properties:
+      additional_info:
+        type: string
+      color:
+        type: string
+      gender:
+        type: string
+      id:
+        type: integer
+      material:
+        type: string
+      size:
+        type: string
+    type: object
+  request.ProductRequest:
+    properties:
+      productId:
+        type: integer
+    type: object
+  request.ProductsByCategoryRequest:
+    properties:
+      categoryName:
+        type: string
+    type: object
+  response.Category:
+    properties:
+      name:
+        type: string
+    type: object
+  response.PopProductsResponse:
+    properties:
+      products:
+        items:
+          $ref: '#/definitions/response.ProductResponsePart'
+        type: array
+    type: object
+  response.ProductCategoryResponse:
+    properties:
+      categories:
+        items:
+          $ref: '#/definitions/response.Category'
+        type: array
+    type: object
+  response.ProductResponse:
+    properties:
+      description:
+        $ref: '#/definitions/models.ProductDescription'
+      image_url:
+        type: string
+      name:
+        type: string
+      price:
+        type: string
+      productId:
+        type: integer
+    type: object
+  response.ProductResponsePart:
+    properties:
+      description_info:
+        type: string
+      image_url:
+        type: string
+      name:
+        type: string
+      price:
+        type: string
+      productId:
+        type: integer
+    type: object
+  response.ProductsByCategoryResponse:
+    properties:
+      products:
+        items:
+          $ref: '#/definitions/response.ProductResponsePart'
+        type: array
+    type: object
 host: localhost:8081
 info:
   contact: {}
-  description: This is a sample server for GoProject
-  title: GoProject Service
+  description: This is a Bebeziansback
+  title: Bebeziansback
   version: "1.0"
 paths:
   /:
@@ -11,4 +89,76 @@ paths:
       description: Responds with the test answer as JSON.
       responses: {}
       summary: Get Test
+      tags:
+      - Server
+  /product/getAllCategory:
+    get:
+      description: Get all product categories
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ProductCategoryResponse'
+      summary: Get All Categories
+      tags:
+      - Product
+  /product/getPopProducts:
+    get:
+      description: Get all Pop Products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.PopProductsResponse'
+      summary: Get All Pop Products
+      tags:
+      - Product
+  /product/getProduct:
+    post:
+      consumes:
+      - application/json
+      description: Get Product by id
+      parameters:
+      - description: Product Id
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.ProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ProductResponse'
+      summary: Get Product
+      tags:
+      - Product
+  /product/getProductsByCategory:
+    post:
+      consumes:
+      - application/json
+      description: Get products by category name
+      parameters:
+      - description: Category Name
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.ProductsByCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ProductsByCategoryResponse'
+      summary: Get All Products By Category
+      tags:
+      - Product
 swagger: "2.0"
