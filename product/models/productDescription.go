@@ -2,7 +2,6 @@ package models
 
 type ProductDescription struct {
 	Id             uint   `json:"id"  gorm:"column:id;primary_key"`
-	Size           string `json:"size" gorm:"column:size"`
 	Color          string `json:"color" gorm:"column:color"`
 	Material       string `json:"material" gorm:"column:material"`
 	Gender         string `json:"gender" gorm:"column:gender"`

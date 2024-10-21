@@ -12,6 +12,13 @@ definitions:
         type: integer
       material:
         type: string
+    type: object
+  request.AddToCartRequest:
+    properties:
+      clientId:
+        type: integer
+      productId:
+        type: integer
       size:
         type: string
     type: object
@@ -56,6 +63,10 @@ definitions:
         type: string
       productId:
         type: integer
+      sizes:
+        items:
+          type: string
+        type: array
     type: object
   response.ProductResponsePart:
     properties:
@@ -91,6 +102,26 @@ paths:
       summary: Get Test
       tags:
       - Server
+  /cart/addToCart:
+    post:
+      consumes:
+      - application/json
+      description: Add Product To Cart
+      parameters:
+      - description: Cart Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.AddToCartRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Add To Cart
+      tags:
+      - Cart
   /product/getAllCategory:
     get:
       description: Get all product categories

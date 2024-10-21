@@ -1,6 +1,5 @@
 CREATE TABLE ProductDescription (
     id SERIAL PRIMARY KEY,
-    size VARCHAR(50),
     color VARCHAR(50),
     material VARCHAR(100),
     gender VARCHAR(50),
@@ -77,4 +76,9 @@ CREATE TABLE CartItems (
     quantity INTEGER NOT NULL CHECK (quantity > 0),
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (cart_id, product_id)
+);
+
+CREATE TABLE Size (
+    product_id INTEGER REFERENCES Products(id),
+    size VARCHAR(255) NOT NULL
 );

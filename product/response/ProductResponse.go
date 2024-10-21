@@ -8,4 +8,5 @@ type ProductResponse struct {
 	ImageURL    string                    `json:"image_url"`
 	Price       string                    `json:"price"`
 	Description models.ProductDescription `json:"description"`
+	Size        []string                  `json:"sizes"`
 }

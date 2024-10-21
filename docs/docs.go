@@ -25,6 +25,37 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/cart/addToCart": {
+            "post": {
+                "description": "Add Product To Cart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Add To Cart",
+                "parameters": [
+                    {
+                        "description": "Cart Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.AddToCartRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/product/getAllCategory": {
             "get": {
                 "description": "Get all product categories",
@@ -152,6 +183,17 @@ const docTemplate = `{
                 },
                 "material": {
                     "type": "string"
+                }
+            }
+        },
+        "request.AddToCartRequest": {
+            "type": "object",
+            "properties": {
+                "clientId": {
+                    "type": "integer"
+                },
+                "productId": {
+                    "type": "integer"
                 },
                 "size": {
                     "type": "string"
@@ -221,6 +263,12 @@ const docTemplate = `{
                 },
                 "productId": {
                     "type": "integer"
+                },
+                "sizes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             }
         },

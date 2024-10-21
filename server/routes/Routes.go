@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"bebeziansback/cart"
 	_ "bebeziansback/docs"
 	"bebeziansback/product"
 	"net/http"
@@ -22,6 +23,11 @@ func SetupRouter() *gin.Engine {
 		productEndpoints.GET("/getPopProducts", product.GetPopProducts)
 		productEndpoints.POST("/getProductsByCategory", product.GetProductsByCategory)
 		productEndpoints.POST("/getProduct", product.GetProductById)
+	}
+
+	cartEndpoints := r.Group("/cart")
+	{
+		cartEndpoints.POST("/addToCart", cart.AddToCart)
 	}
 
 	r.GET("/", GetTest)

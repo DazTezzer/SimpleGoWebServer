@@ -50,13 +50,14 @@ func MapProductsByCategoryToResponse(products []models.Product) response.Product
 	return response.ProductsByCategoryResponse{Products: productResponses}
 }
 
-func MapProductToResponse(product models.Product) response.ProductResponse {
+func MapProductToResponse(product models.Product, sizes []string) response.ProductResponse {
 	productResponse := response.ProductResponse{
 		ProductID:   product.Id,
 		Name:        product.Name,
 		ImageURL:    product.Image.ImageUrl,
 		Price:       fmt.Sprintf("%.2f", product.Price),
 		Description: product.Description,
+		Size:        sizes,
 	}
 
 	return productResponse

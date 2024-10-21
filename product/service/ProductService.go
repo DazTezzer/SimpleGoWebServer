@@ -48,6 +48,8 @@ func GetProductsByCategory(name string) (response.ProductsByCategoryResponse, er
 
 func GetProductById(id int) (response.ProductResponse, error) {
 	var product models.Product
+	var sizes []string
+
 	if err := config.DB.
 		Preload("Image").
 		Preload("Description").
@@ -56,6 +58,13 @@ func GetProductById(id int) (response.ProductResponse, error) {
 		Find(&product).Error; err != nil {
 		return response.ProductResponse{}, err
 	}
-	response := mappers.MapProductToResponse(product)
-	return response, nil
+
+	if err := config.DB.Table("size").
+		Where("product_id = ?", id).
+		Pluck("size", &sizes).Error; err != nil { 
+		return response.ProductResponse{}, err
+	}
+	productResponse := mappers.MapProductToResponse(product,sizes)
+
+	return productResponse, nil
 }
