@@ -24,7 +24,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	//config.DB.AutoMigrate(&Models.Guitar{})
 	r := routes.SetupRouter()
 	if err := r.Run(":8081"); err != nil {
 		log.Fatalf("ERROR: Не удалось запустить сервер: %v", err)
