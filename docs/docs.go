@@ -56,6 +56,71 @@ const docTemplate = `{
                 }
             }
         },
+        "/customer/login": {
+            "post": {
+                "description": "Login Customer with name and password",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Login Customer",
+                "parameters": [
+                    {
+                        "description": "Customer",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CustomerRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Customer logged in successfully",
+                        "schema": {
+                            "$ref": "#/definitions/response.TokenResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/customer/register": {
+            "post": {
+                "description": "Register Customer with name and password",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Register Customer",
+                "parameters": [
+                    {
+                        "description": "Customer",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CustomerRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Customer created successfully"
+                    }
+                }
+            }
+        },
         "/product/getAllCategory": {
             "get": {
                 "description": "Get all product categories",
@@ -200,6 +265,20 @@ const docTemplate = `{
                 }
             }
         },
+        "request.CustomerRequest": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
         "request.ProductRequest": {
             "type": "object",
             "properties": {
@@ -300,6 +379,14 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/response.ProductResponsePart"
                     }
+                }
+            }
+        },
+        "response.TokenResponse": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
                 }
             }
         }

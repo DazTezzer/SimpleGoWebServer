@@ -16,6 +16,7 @@ import (
 )
 
 func main() {
+	config.LoadEnv()
 	if err := InitDB(); err != nil {
 		log.Fatalf("ERROR: Ошибка соединения с базой данных: %v", err)
 	}

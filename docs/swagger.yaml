@@ -22,6 +22,15 @@ definitions:
       size:
         type: string
     type: object
+  request.CustomerRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
   request.ProductRequest:
     properties:
       productId:
@@ -88,6 +97,11 @@ definitions:
           $ref: '#/definitions/response.ProductResponsePart'
         type: array
     type: object
+  response.TokenResponse:
+    properties:
+      token:
+        type: string
+    type: object
 host: localhost:8081
 info:
   contact: {}
@@ -122,6 +136,48 @@ paths:
       summary: Add To Cart
       tags:
       - Cart
+  /customer/login:
+    post:
+      consumes:
+      - application/json
+      description: Login Customer with name and password
+      parameters:
+      - description: Customer
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.CustomerRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Customer logged in successfully
+          schema:
+            $ref: '#/definitions/response.TokenResponse'
+      summary: Login Customer
+      tags:
+      - Customer
+  /customer/register:
+    post:
+      consumes:
+      - application/json
+      description: Register Customer with name and password
+      parameters:
+      - description: Customer
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.CustomerRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Customer created successfully
+      summary: Register Customer
+      tags:
+      - Customer
   /product/getAllCategory:
     get:
       description: Get all product categories

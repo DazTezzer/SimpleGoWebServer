@@ -3,6 +3,7 @@ package service
 import (
 	"bebeziansback/cart/models"
 	"bebeziansback/cart/request"
+	customer "bebeziansback/customer/models"
 	"bebeziansback/server/config"
 	"log"
 	"time"
@@ -11,7 +12,7 @@ import (
 )
 
 func AddToCart(request request.AddToCartRequest) error {
-	var customer models.Customer
+	var customer customer.Customer
 	if err := config.DB.Where("id = ?", request.CustomerID).First(&customer).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			log.Printf("ERROR: customer with ID %d does not exist", request.CustomerID)

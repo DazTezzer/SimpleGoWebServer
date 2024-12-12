@@ -2,6 +2,7 @@ package routes
 
 import (
 	"bebeziansback/cart"
+	"bebeziansback/customer"
 	_ "bebeziansback/docs"
 	"bebeziansback/product"
 	"net/http"
@@ -28,6 +29,12 @@ func SetupRouter() *gin.Engine {
 	cartEndpoints := r.Group("/cart")
 	{
 		cartEndpoints.POST("/addToCart", cart.AddToCart)
+	}
+
+	customerEndpoints := r.Group("/customer")
+	{
+		customerEndpoints.POST("/register", customer.Register)
+		customerEndpoints.POST("/login", customer.Login)
 	}
 
 	r.GET("/", GetTest)
