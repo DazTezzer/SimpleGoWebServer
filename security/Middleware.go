@@ -16,11 +16,27 @@ func AuthMiddleware() gin.HandlerFunc {
 
         claims, err := ValidateToken(token)
         if err != nil {
+            if claims != nil && err.Error() == "token is expired" {
+                newToken, err := GenerateToken(claims.Subject)
+                if err != nil {
+                    c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not generate new token"})
+                    c.Abort()
+                    return
+                }
+
+                c.JSON(http.StatusUnauthorized, gin.H{
+                    "error":     "Token expired",
+                    "new_token": newToken,
+                })
+                c.Abort()
+                return
+            }
+
             c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
             c.Abort()
             return
         }
-		
+    
         c.Set("claims", claims)
         c.Next()
     }
