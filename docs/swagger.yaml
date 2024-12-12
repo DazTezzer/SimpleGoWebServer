@@ -22,7 +22,14 @@ definitions:
       size:
         type: string
     type: object
-  request.CustomerRequest:
+  request.CustomerLoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  request.CustomerRegisterRequest:
     properties:
       email:
         type: string
@@ -147,7 +154,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/request.CustomerRequest'
+          $ref: '#/definitions/request.CustomerLoginRequest'
       produces:
       - application/json
       responses:
@@ -169,7 +176,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/request.CustomerRequest'
+          $ref: '#/definitions/request.CustomerRegisterRequest'
       produces:
       - application/json
       responses:

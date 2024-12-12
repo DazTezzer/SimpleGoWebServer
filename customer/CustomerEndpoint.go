@@ -13,12 +13,12 @@ import (
 // @Description  Register Customer with name and password
 // @Accept 		 json
 // @Produce      json
-// @Param 		 body body request.CustomerRequest true "Customer"
+// @Param 		 body body request.CustomerRegisterRequest true "Customer"
 // @Success      200  "Customer created successfully"
 // @Router       /customer/register [post]
 // @Tags Customer
 func Register(c *gin.Context) {
-	var CustomerRequest request.CustomerRequest
+	var CustomerRequest request.CustomerRegisterRequest
 	if err := c.ShouldBindJSON(&CustomerRequest); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
 		return
@@ -36,12 +36,12 @@ func Register(c *gin.Context) {
 // @Description  Login Customer with name and password
 // @Accept 		 json
 // @Produce      json
-// @Param 		 body body request.CustomerRequest true "Customer"
+// @Param 		 body body request.CustomerLoginRequest true "Customer"
 // @Success 	 200 {object} response.TokenResponse "Customer logged in successfully"
 // @Router       /customer/login [post]
 // @Tags Customer
 func Login(c *gin.Context) {
-	var CustomerRequest request.CustomerRequest
+	var CustomerRequest request.CustomerLoginRequest
 	if err := c.ShouldBindJSON(&CustomerRequest); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
 		return

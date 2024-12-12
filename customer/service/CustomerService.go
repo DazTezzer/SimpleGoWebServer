@@ -13,7 +13,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func RegisterCustomer(customerRequest request.CustomerRequest) error {
+func RegisterCustomer(customerRequest request.CustomerRegisterRequest) error {
 	err := checkCustomer(customerRequest.Email)
 	if err != nil {
 		return err
@@ -31,7 +31,7 @@ func RegisterCustomer(customerRequest request.CustomerRequest) error {
 	return nil
 }
 
-func LoginCustomer(customerRequest request.CustomerRequest) (response.TokenResponse, error) {
+func LoginCustomer(customerRequest request.CustomerLoginRequest) (response.TokenResponse, error) {
 	var foundCustomer models.Customer
 
 	if err := config.DB.Where("email = ?", customerRequest.Email).First(&foundCustomer).Error; err != nil {
@@ -44,7 +44,7 @@ func LoginCustomer(customerRequest request.CustomerRequest) (response.TokenRespo
 	if err := bcrypt.CompareHashAndPassword([]byte(foundCustomer.PasswordHash), []byte(customerRequest.Password)); err != nil {
 		return response.TokenResponse{}, err
 	}
-	token, err := security.GenerateToken(customerRequest.Username)
+	token, err := security.GenerateToken(customerRequest.Email)
 	if err != nil {
 		return response.TokenResponse{}, err
 	}
@@ -52,7 +52,7 @@ func LoginCustomer(customerRequest request.CustomerRequest) (response.TokenRespo
 	return response.TokenResponse{Token: token}, nil
 }
 
-func createCustomer(customerRequest request.CustomerRequest, hash []byte) models.Customer {
+func createCustomer(customerRequest request.CustomerRegisterRequest, hash []byte) models.Customer {
 	return models.Customer{
 		Username:     customerRequest.Username,
 		PasswordHash: string(hash),
