@@ -41,7 +41,7 @@ func AddToCart(c *gin.Context) {
 }
 
 // @Summary      Get Cart
-// @Description  Get Products from Cart by cusomer
+// @Description  Get Products from Cart by customer
 // @Accept 		 json
 // @Produce      json
 // @Security     BearerAuth

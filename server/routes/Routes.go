@@ -5,6 +5,7 @@ import (
 	"bebeziansback/customer"
 	_ "bebeziansback/docs"
 	"bebeziansback/product"
+	"bebeziansback/profile"
 	"bebeziansback/security"
 	"bebeziansback/server/config"
 	"net/http"
@@ -47,6 +48,11 @@ func SetupRouter() *gin.Engine {
 	{
 		customerEndpoints.POST("/register", customer.Register)
 		customerEndpoints.POST("/login", customer.Login)
+	}
+
+	profileEndpoints := r.Group("/profile").Use(security.AuthMiddleware())
+	{
+		profileEndpoints.GET("/info", profile.Info)
 	}
 
 	r.GET("/", GetTest)

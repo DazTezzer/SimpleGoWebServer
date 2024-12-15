@@ -147,7 +147,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: Get Products from Cart by cusomer
+      description: Get Products from Cart by customer
       produces:
       - application/json
       responses:
@@ -270,6 +270,21 @@ paths:
       summary: Get All Products By Category
       tags:
       - Product
+  /profile/info:
+    get:
+      consumes:
+      - application/json
+      description: Get Profile Info by customer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      security:
+      - BearerAuth: []
+      summary: Get Profile Info
+      tags:
+      - Profile
 securityDefinitions:
   BearerAuth:
     in: header

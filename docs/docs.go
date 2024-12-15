@@ -68,7 +68,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Get Products from Cart by cusomer",
+                "description": "Get Products from Cart by customer",
                 "consumes": [
                     "application/json"
                 ],
@@ -255,6 +255,31 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/response.ProductsByCategoryResponse"
                         }
+                    }
+                }
+            }
+        },
+        "/profile/info": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Profile Info by customer",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Get Profile Info",
+                "responses": {
+                    "200": {
+                        "description": "OK"
                     }
                 }
             }
