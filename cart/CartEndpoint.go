@@ -39,3 +39,28 @@ func AddToCart(c *gin.Context) {
 
 	c.Status(http.StatusOK)
 }
+
+// @Summary      Get Cart
+// @Description  Get Products from Cart by cusomer
+// @Accept 		 json
+// @Produce      json
+// @Security     BearerAuth
+// @Success      200 "OK"
+// @Router       /cart/getCart [get]
+// @Tags Cart
+func GetCart(c *gin.Context) {
+	customerIDStr := c.MustGet("customerID").(string)
+	customerID64, err := strconv.ParseUint(customerIDStr, 10, 32)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Неверный идентификатор клиента:"})
+		return
+	}
+	customerID := uint(customerID64)
+	cartResponse, err := service.GetCart(customerID);
+	if err != nil {
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, cartResponse)
+}

@@ -39,6 +39,7 @@ func SetupRouter() *gin.Engine {
 
 	cartEndpoints := r.Group("/cart").Use(security.AuthMiddleware())
 	{
+		cartEndpoints.GET("/getCart", cart.GetCart)
 		cartEndpoints.POST("/addToCart", cart.AddToCart)
 	}
 

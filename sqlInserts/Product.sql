@@ -75,7 +75,7 @@ INSERT INTO Size (product_id, size) VALUES
 (1, 'M'),
 (1, 'L'),
 (1, 'XL'),
-(1, 'XXL'),
+(1, 'XXL');
 (27, 'OS'),
 (28, 'XS'),
 (28, 'S'),

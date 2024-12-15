@@ -61,6 +61,31 @@ const docTemplate = `{
                 }
             }
         },
+        "/cart/getCart": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Products from Cart by cusomer",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Get Cart",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/customer/login": {
             "post": {
                 "description": "Login Customer with name and password",

@@ -143,6 +143,21 @@ paths:
       summary: Add To Cart
       tags:
       - Cart
+  /cart/getCart:
+    get:
+      consumes:
+      - application/json
+      description: Get Products from Cart by cusomer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      security:
+      - BearerAuth: []
+      summary: Get Cart
+      tags:
+      - Cart
   /customer/login:
     post:
       consumes:

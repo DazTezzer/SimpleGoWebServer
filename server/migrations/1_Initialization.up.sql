@@ -71,11 +71,13 @@ CREATE TABLE Carts (
 );
 
 CREATE TABLE CartItems (
+    id SERIAL,
     cart_id INTEGER REFERENCES Carts(id),
     product_id INTEGER REFERENCES Products(id),
+    size VARCHAR(255) NOT NULL,
     quantity INTEGER NOT NULL CHECK (quantity > 0),
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (cart_id, product_id)
+    PRIMARY KEY (id, cart_id, product_id, size)
 );
 
 CREATE TABLE Size (
