@@ -36,3 +36,7 @@ func GetDBName() string {
 func GetJWTSecret() string {
 	return os.Getenv("JWT_SECRET")
 }
+
+func GetCORS() string {
+	return os.Getenv("CORS")
+}
