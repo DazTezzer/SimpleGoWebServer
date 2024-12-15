@@ -15,8 +15,6 @@ definitions:
     type: object
   request.AddToCartRequest:
     properties:
-      clientId:
-        type: integer
       productId:
         type: integer
       size:
@@ -140,6 +138,8 @@ paths:
       responses:
         "200":
           description: OK
+      security:
+      - BearerAuth: []
       summary: Add To Cart
       tags:
       - Cart
@@ -255,4 +255,9 @@ paths:
       summary: Get All Products By Category
       tags:
       - Product
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

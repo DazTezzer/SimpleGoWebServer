@@ -5,6 +5,7 @@ import (
 	"bebeziansback/customer"
 	_ "bebeziansback/docs"
 	"bebeziansback/product"
+	"bebeziansback/security"
 	"net/http"
 
 	"github.com/gin-contrib/cors"
@@ -26,7 +27,7 @@ func SetupRouter() *gin.Engine {
 		productEndpoints.POST("/getProduct", product.GetProductById)
 	}
 
-	cartEndpoints := r.Group("/cart")
+	cartEndpoints := r.Group("/cart").Use(security.AuthMiddleware())
 	{
 		cartEndpoints.POST("/addToCart", cart.AddToCart)
 	}

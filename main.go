@@ -3,6 +3,10 @@
 // @description     This is a Bebeziansback
 // @host            localhost:8081
 // @BasePath        /
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
+
 package main
 
 import (

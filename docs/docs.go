@@ -27,6 +27,11 @@ const docTemplate = `{
         },
         "/cart/addToCart": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Add Product To Cart",
                 "consumes": [
                     "application/json"
@@ -254,9 +259,6 @@ const docTemplate = `{
         "request.AddToCartRequest": {
             "type": "object",
             "properties": {
-                "clientId": {
-                    "type": "integer"
-                },
                 "productId": {
                     "type": "integer"
                 },
@@ -400,6 +402,13 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }`

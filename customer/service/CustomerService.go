@@ -8,6 +8,7 @@ import (
 	"bebeziansback/server/config"
 	"fmt"
 	"log"
+	"strconv"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
@@ -44,7 +45,7 @@ func LoginCustomer(customerRequest request.CustomerLoginRequest) (response.Token
 	if err := bcrypt.CompareHashAndPassword([]byte(foundCustomer.PasswordHash), []byte(customerRequest.Password)); err != nil {
 		return response.TokenResponse{}, err
 	}
-	token, err := security.GenerateToken(customerRequest.Email)
+	token, err := security.GenerateToken(strconv.FormatUint(uint64(foundCustomer.Id), 10))
 	if err != nil {
 		return response.TokenResponse{}, err
 	}

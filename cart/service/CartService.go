@@ -11,21 +11,21 @@ import (
 	"gorm.io/gorm"
 )
 
-func AddToCart(request request.AddToCartRequest) error {
+func AddToCart(request request.AddToCartRequest, customerID uint) error {
 	var customer customer.Customer
-	if err := config.DB.Where("id = ?", request.CustomerID).First(&customer).Error; err != nil {
+	if err := config.DB.Where("id = ?", customerID).First(&customer).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
-			log.Printf("ERROR: customer with ID %d does not exist", request.CustomerID)
+			log.Printf("ERROR: customer with ID %d does not exist", customerID)
 			return err
 		}
 		return err
 	}
 
 	var cart models.Cart
-	if err := config.DB.Where("customer_id = ?", request.CustomerID).First(&cart).Error; err != nil {
+	if err := config.DB.Where("customer_id = ?", customerID).First(&cart).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			cart = models.Cart{
-				CustomerID: request.CustomerID,
+				CustomerID: customerID,
 			}
 			if err := config.DB.Create(&cart).Error; err != nil {
 				return err
