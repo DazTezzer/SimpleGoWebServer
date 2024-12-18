@@ -114,14 +114,14 @@ info:
   title: Bebeziansback
   version: "1.0"
 paths:
-  /:
+  /api/:
     get:
       description: Responds with the test answer as JSON.
       responses: {}
       summary: Get Test
       tags:
       - Server
-  /cart/addToCart:
+  /api/cart/addToCart:
     post:
       consumes:
       - application/json
@@ -143,6 +143,111 @@ paths:
       summary: Add To Cart
       tags:
       - Cart
+  /api/customer/register:
+    post:
+      consumes:
+      - application/json
+      description: Register Customer with name and password
+      parameters:
+      - description: Customer
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.CustomerRegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Customer created successfully
+      summary: Register Customer
+      tags:
+      - Customer
+  /api/product/getAllCategory:
+    get:
+      description: Get all product categories
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ProductCategoryResponse'
+      summary: Get All Categories
+      tags:
+      - Product
+  /api/product/getPopProducts:
+    get:
+      description: Get all Pop Products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.PopProductsResponse'
+      summary: Get All Pop Products
+      tags:
+      - Product
+  /api/product/getProduct:
+    post:
+      consumes:
+      - application/json
+      description: Get Product by id
+      parameters:
+      - description: Product Id
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.ProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ProductResponse'
+      summary: Get Product
+      tags:
+      - Product
+  /api/product/getProductsByCategory:
+    post:
+      consumes:
+      - application/json
+      description: Get products by category name
+      parameters:
+      - description: Category Name
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.ProductsByCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ProductsByCategoryResponse'
+      summary: Get All Products By Category
+      tags:
+      - Product
+  /api/profile/info:
+    get:
+      consumes:
+      - application/json
+      description: Get Profile Info by customer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      security:
+      - BearerAuth: []
+      summary: Get Profile Info
+      tags:
+      - Profile
   /cart/getCart:
     get:
       consumes:
@@ -180,111 +285,6 @@ paths:
       summary: Login Customer
       tags:
       - Customer
-  /customer/register:
-    post:
-      consumes:
-      - application/json
-      description: Register Customer with name and password
-      parameters:
-      - description: Customer
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/request.CustomerRegisterRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Customer created successfully
-      summary: Register Customer
-      tags:
-      - Customer
-  /product/getAllCategory:
-    get:
-      description: Get all product categories
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/response.ProductCategoryResponse'
-      summary: Get All Categories
-      tags:
-      - Product
-  /product/getPopProducts:
-    get:
-      description: Get all Pop Products
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/response.PopProductsResponse'
-      summary: Get All Pop Products
-      tags:
-      - Product
-  /product/getProduct:
-    post:
-      consumes:
-      - application/json
-      description: Get Product by id
-      parameters:
-      - description: Product Id
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/request.ProductRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/response.ProductResponse'
-      summary: Get Product
-      tags:
-      - Product
-  /product/getProductsByCategory:
-    post:
-      consumes:
-      - application/json
-      description: Get products by category name
-      parameters:
-      - description: Category Name
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/request.ProductsByCategoryRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/response.ProductsByCategoryResponse'
-      summary: Get All Products By Category
-      tags:
-      - Product
-  /profile/info:
-    get:
-      consumes:
-      - application/json
-      description: Get Profile Info by customer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-      security:
-      - BearerAuth: []
-      summary: Get Profile Info
-      tags:
-      - Profile
 securityDefinitions:
   BearerAuth:
     in: header

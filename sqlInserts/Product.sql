@@ -1,73 +1,38 @@
 -- Вставка данных в таблицу ProductDescription
-INSERT INTO ProductDescription (color, material, gender, additional_info) VALUES
-('Черный', 'Хлопок', 'Мужской', 'Удобная и стильная шляпа, придающая стиль. Она всем как раз!'),
-('Черный', 'Полиэстер', 'Мужской', 'Стильный черный худи из мягкого материала идеально подходит для повседневной носки, сочетая комфорт и универсальность'),
-('Коричневый', 'Кожа', 'Мужской', 'Качественные зимние ботинки для холодной погоды'),
-('Белый', 'Неопрен', 'Мужской', 'Куртка с принтом скорпиона сзади придает загадочность вашему стилю. Отлично подойдет для повседневной носки и ночных поездок на машине'),
-('Синий', 'Деним', 'Мужской', 'Классические синие джинсы с комфортной посадкой'),
-('Белый', 'Хлопок', 'Мужской', 'Футболка с самураем для самых настоящих воинов.')
+INSERT INTO ProductDescription (id, color, material, gender, additional_info) VALUES
+(1,'Черный', 'Хлопок', 'Мужской', 'Удобная и стильная шляпа, придающая стиль. Она всем как раз!'),
+(2,'Черный', 'Полиэстер', 'Мужской', 'Стильный черный худи из мягкого материала идеально подходит для повседневной носки, сочетая комфорт и универсальность'),
+(3,'Коричневый', 'Кожа', 'Мужской', 'Качественные зимние ботинки для холодной погоды'),
+(4,'Белый', 'Неопрен', 'Мужской', 'Куртка с принтом скорпиона сзади придает загадочность вашему стилю. Отлично подойдет для повседневной носки и ночных поездок на машине'),
+(5,'Синий', 'Деним', 'Мужской', 'Классические синие джинсы с комфортной посадкой'),
+(6,'Белый', 'Хлопок', 'Мужской', 'Футболка с самураем для самых настоящих воинов.');
 
 -- Вставка данных в таблицу ProductCategory
-INSERT INTO ProductCategory (name) VALUES
-('Футболки'),
-('Куртки'),
-('Штаны'),
-('Головные уборы'),
-('Обувь'),
-('Кофты')
+INSERT INTO ProductCategory (id, name) VALUES
+(1,'Футболки'),
+(2,'Куртки'),
+(3,'Штаны'),
+(4,'Головные уборы'),
+(5,'Обувь'),
+(6,'Кофты');
 
 -- Вставка данных в таблицу ProductImage
-INSERT INTO ProductImage (name, image) VALUES
-('Белая кепка', '/images/whiteCap/whiteCap.jpg'),
-('Коричневая кожаная куртка', '/images/brownLeatherJacket/brownLeatherJacket.jpg'),
-('Кремовые брюки', '/images/creamPants/creamPants.jpg'),
-('Черная футболка', '/images/blackTshirt/blackTshirt.jpg'),
-('Серый свитшот', '/images/greySweatshort/greySweatshort.jpg'),
-('Синие кроссовки', '/images/blueSneakers/blueSneakers.jpg');
-
-('Футболка с самураем','/images/samuraiT-shirt/samuraiT-Shirt.jpg'),
-('Шляпа', '/images/blackHat/blackHat.jpg'),
-('Худи', '/images/blackHoodie/blackHoodie.jpg'),
-('Зимние ботинки', '/images/brownWinterBoots/brownWinterBoots.jpg'),
-('Куртка со скорпионом', '/images/scorpionJacket/scorpionJacket.jpg'),
-('Джинсы', '/images/blueJeans/blueJeans.jpg');
-
-SELECT * FROM ProductImage
-DELETE FROM ProductImage;
-DELETE FROM ProductImage
-WHERE id BETWEEN 7 AND 12;
-
--- Сначала временно изменяем id на отрицательные числа или большие числа
-UPDATE ProductImage
-SET id = -id
-WHERE id IN (3, 4, 5, 6, 7);
-
--- Затем обновляем id на нужные значения
-UPDATE ProductImage
-SET id = CASE
-    WHEN id = -3 THEN 2
-    WHEN id = -4 THEN 3
-    WHEN id = -5 THEN 4
-    WHEN id = -6 THEN 5
-    WHEN id = -7 THEN 6
-END
-WHERE id IN (-3, -4, -5, -6, -7);
-
--- И наконец возвращаем отрицательные id обратно в положительные
-UPDATE my_table
-SET id = ABS(id)
-WHERE id < 0;
-
-
+INSERT INTO ProductImage (id, name, image) VALUES
+(1, 'Футболка с самураем','/images/samuraiT-shirt/samuraiT-Shirt.jpg'),
+(2, 'Шляпа', '/images/blackHat/blackHat.jpg'),
+(3, 'Худи', '/images/blackHoodie/blackHoodie.jpg'),
+(4, 'Зимние ботинки', '/images/brownWinterBoots/brownWinterBoots.jpg'),
+(5, 'Куртка со скорпионом', '/images/scorpionJacket/scorpionJacket.jpg'),
+(6, 'Джинсы', '/images/blueJeans/blueJeans.jpg');
 
 -- Вставка данных в таблицу Products
-INSERT INTO Products (name, image_id, price, description_id, category_id) VALUES
-('Шляпа', 2, 1000, 2, 4),
-('Худи', 3, 2000, 3, 6),
-('Зимние ботинки', 4, 5000, 4, 5),
-('Куртка со скорпионом', 5, 6000, 5, 2),
-('Синие джинсы', 6, 3000, 6, 3);
-('Футболка с самураем', 1, 1500, 1, 1),
+INSERT INTO Products (id, name, image_id, price, description_id, category_id) VALUES
+(1, 'Шляпа', 2, 1000, 1, 4),
+(2, 'Худи', 3, 2000, 2, 6),
+(3, 'Зимние ботинки', 4, 5000, 3, 5),
+(4, 'Куртка со скорпионом', 5, 6000, 4, 2),
+(5, 'Синие джинсы', 6, 3000, 5, 3),
+(6, 'Футболка с самураем', 1, 1500, 6, 1);
 
 INSERT INTO Size (product_id, size) VALUES
 (1, 'XS'),
@@ -75,39 +40,34 @@ INSERT INTO Size (product_id, size) VALUES
 (1, 'M'),
 (1, 'L'),
 (1, 'XL'),
-(1, 'XXL');
-(27, 'OS'),
-(28, 'XS'),
-(28, 'S'),
-(28, 'M'),
-(28, 'L'),
-(28, 'XL'),
-(28, 'XXL'),
-(29, '39EU'),
-(29, '40EU'),
-(29, '41EU'),
-(29, '42EU'),
-(29, '43EU'),
-(29, '44EU'),
-(30, 'XS'),
-(30, 'S'),
-(30, 'M'),
-(30, 'L'),
-(30, 'XL'),
-(30, 'XXL'),
-(31, 'XS'),
-(31, 'S'),
-(31, 'M'),
-(31, 'L'),
-(31, 'XL'),
-(31, 'XXL');
-
-
-SELECT * FROM ProductImage
-SELECT * FROM  Products
-
-SELECT * FROM Size
-
-SELECT p.name, s.size 
-FROM Products as p
-JOIN Size as s ON s.product_id = p.id;
+(1, 'XXL'), -- Шляпа не требует размера, но это пример
+(2, 'XS'),
+(2, 'S'),
+(2, 'M'),
+(2, 'L'),
+(2, 'XL'),
+(2, 'XXL'), -- Худи 
+(3, '39EU'),
+(3, '40EU'),
+(3, '41EU'),
+(3, '42EU'),
+(3, '43EU'),
+(3, '44EU'), -- Зимние ботинки
+(4, 'XS'),
+(4, 'S'),
+(4, 'M'),
+(4, 'L'),
+(4, 'XL'),
+(4, 'XXL'), -- Куртка
+(5, 'XS'),
+(5, 'S'),
+(5, 'M'),
+(5, 'L'),
+(5, 'XL'),
+(5, 'XXL'), -- Джинсы
+(6, 'XS'),
+(6, 'S'),
+(6, 'M'),
+(6, 'L'),
+(6, 'XL'),
+(6, 'XXL'); -- Футболка с самураем

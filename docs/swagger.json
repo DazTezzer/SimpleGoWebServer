@@ -9,7 +9,7 @@
     "host": "localhost:8081",
     "basePath": "/",
     "paths": {
-        "/": {
+        "/api/": {
             "get": {
                 "description": "Responds with the test answer as JSON.",
                 "tags": [
@@ -19,7 +19,7 @@
                 "responses": {}
             }
         },
-        "/cart/addToCart": {
+        "/api/cart/addToCart": {
             "post": {
                 "security": [
                     {
@@ -48,6 +48,170 @@
                         }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/customer/register": {
+            "post": {
+                "description": "Register Customer with name and password",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Register Customer",
+                "parameters": [
+                    {
+                        "description": "Customer",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CustomerRegisterRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Customer created successfully"
+                    }
+                }
+            }
+        },
+        "/api/product/getAllCategory": {
+            "get": {
+                "description": "Get all product categories",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get All Categories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ProductCategoryResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/getPopProducts": {
+            "get": {
+                "description": "Get all Pop Products",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get All Pop Products",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.PopProductsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/getProduct": {
+            "post": {
+                "description": "Get Product by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Product",
+                "parameters": [
+                    {
+                        "description": "Product Id",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ProductRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ProductResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/getProductsByCategory": {
+            "post": {
+                "description": "Get products by category name",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get All Products By Category",
+                "parameters": [
+                    {
+                        "description": "Category Name",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ProductsByCategoryRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ProductsByCategoryResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/profile/info": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Profile Info by customer",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Get Profile Info",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -110,170 +274,6 @@
                         "schema": {
                             "$ref": "#/definitions/response.TokenResponse"
                         }
-                    }
-                }
-            }
-        },
-        "/customer/register": {
-            "post": {
-                "description": "Register Customer with name and password",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Customer"
-                ],
-                "summary": "Register Customer",
-                "parameters": [
-                    {
-                        "description": "Customer",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/request.CustomerRegisterRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Customer created successfully"
-                    }
-                }
-            }
-        },
-        "/product/getAllCategory": {
-            "get": {
-                "description": "Get all product categories",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Product"
-                ],
-                "summary": "Get All Categories",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/response.ProductCategoryResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/product/getPopProducts": {
-            "get": {
-                "description": "Get all Pop Products",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Product"
-                ],
-                "summary": "Get All Pop Products",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/response.PopProductsResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/product/getProduct": {
-            "post": {
-                "description": "Get Product by id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Product"
-                ],
-                "summary": "Get Product",
-                "parameters": [
-                    {
-                        "description": "Product Id",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/request.ProductRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/response.ProductResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/product/getProductsByCategory": {
-            "post": {
-                "description": "Get products by category name",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Product"
-                ],
-                "summary": "Get All Products By Category",
-                "parameters": [
-                    {
-                        "description": "Category Name",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/request.ProductsByCategoryRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/response.ProductsByCategoryResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/profile/info": {
-            "get": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Get Profile Info by customer",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Profile"
-                ],
-                "summary": "Get Profile Info",
-                "responses": {
-                    "200": {
-                        "description": "OK"
                     }
                 }
             }

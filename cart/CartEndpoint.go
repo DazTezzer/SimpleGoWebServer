@@ -16,7 +16,7 @@ import (
 // @Param 		 body body request.AddToCartRequest true "Cart Request"
 // @Security     BearerAuth
 // @Success      200 "OK"
-// @Router       /cart/addToCart [post]
+// @Router       /api/cart/addToCart [post]
 // @Tags Cart
 func AddToCart(c *gin.Context) {
 	var addRequest request.AddToCartRequest

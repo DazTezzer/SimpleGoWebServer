@@ -30,7 +30,7 @@ func main() {
 	}
 
 	r := routes.SetupRouter()
-	if err := r.Run(":8081"); err != nil {
+	if err := r.Run(":8080"); err != nil {
 		log.Fatalf("ERROR: Не удалось запустить сервер: %v", err)
 	}
 }

@@ -30,7 +30,9 @@ func SetupRouter() *gin.Engine {
 		MaxAge:           12 * time.Hour,
 	}))
 
-	productEndpoints := r.Group("/product")
+	apiGroup := r.Group("/api")
+
+	productEndpoints := apiGroup.Group("/product")
 	{
 		productEndpoints.GET("/getAllCategory", product.GetAllCategory)
 		productEndpoints.GET("/getPopProducts", product.GetPopProducts)
@@ -38,31 +40,31 @@ func SetupRouter() *gin.Engine {
 		productEndpoints.POST("/getProduct", product.GetProductById)
 	}
 
-	cartEndpoints := r.Group("/cart").Use(security.AuthMiddleware())
+	cartEndpoints := apiGroup.Group("/cart").Use(security.AuthMiddleware())
 	{
 		cartEndpoints.GET("/getCart", cart.GetCart)
 		cartEndpoints.POST("/addToCart", cart.AddToCart)
 	}
 
-	customerEndpoints := r.Group("/customer")
+	customerEndpoints := apiGroup.Group("/customer")
 	{
 		customerEndpoints.POST("/register", customer.Register)
 		customerEndpoints.POST("/login", customer.Login)
 	}
 
-	profileEndpoints := r.Group("/profile").Use(security.AuthMiddleware())
+	profileEndpoints := apiGroup.Group("/profile").Use(security.AuthMiddleware())
 	{
 		profileEndpoints.GET("/info", profile.Info)
 	}
 
-	r.GET("/", GetTest)
-	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.GET("/api/", GetTest)
+	r.GET("/api/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return r
 }
 
 // @Summary      Get Test
 // @Description  Responds with the test answer as JSON.
-// @Router       / [get]
+// @Router       /api/ [get]
 // @Tags Server
 func GetTest(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{

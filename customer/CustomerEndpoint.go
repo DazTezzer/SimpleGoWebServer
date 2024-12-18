@@ -15,7 +15,7 @@ import (
 // @Produce      json
 // @Param 		 body body request.CustomerRegisterRequest true "Customer"
 // @Success      200  "Customer created successfully"
-// @Router       /customer/register [post]
+// @Router       /api/customer/register [post]
 // @Tags Customer
 func Register(c *gin.Context) {
 	var CustomerRequest request.CustomerRegisterRequest

@@ -14,7 +14,7 @@ import (
 // @Produce      json
 // @Security     BearerAuth
 // @Success      200 "OK"
-// @Router       /profile/info [get]
+// @Router       /api/profile/info [get]
 // @Tags Profile
 func Info(c *gin.Context) {
 	customerIDStr := c.MustGet("customerID").(string)

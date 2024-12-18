@@ -13,7 +13,7 @@ import (
 // @Description  Get all product categories
 // @Produce      json
 // @Success      200  {object}  response.ProductCategoryResponse  "OK"
-// @Router       /product/getAllCategory [get]
+// @Router       /api/product/getAllCategory [get]
 // @Tags Product
 func GetAllCategory(c *gin.Context) {
 
@@ -30,7 +30,7 @@ func GetAllCategory(c *gin.Context) {
 // @Description  Get all Pop Products
 // @Produce      json
 // @Success      200  {object}  response.PopProductsResponse  "OK"
-// @Router       /product/getPopProducts [get]
+// @Router       /api/product/getPopProducts [get]
 // @Tags Product
 func GetPopProducts(c *gin.Context) {
 
@@ -49,7 +49,7 @@ func GetPopProducts(c *gin.Context) {
 // @Produce      json
 // @Param 		 body body request.ProductsByCategoryRequest true "Category Name"
 // @Success      200   {object}  response.ProductsByCategoryResponse  "OK"
-// @Router       /product/getProductsByCategory [post]
+// @Router       /api/product/getProductsByCategory [post]
 // @Tags Product
 func GetProductsByCategory(c *gin.Context) {
 	var req request.ProductsByCategoryRequest
@@ -73,7 +73,7 @@ func GetProductsByCategory(c *gin.Context) {
 // @Produce      json
 // @Param 		 body body request.ProductRequest true "Product Id"
 // @Success      200   {object}  response.ProductResponse  "OK"
-// @Router       /product/getProduct [post]
+// @Router       /api/product/getProduct [post]
 // @Tags Product
 func GetProductById(c *gin.Context) {
 	var req request.ProductRequest
