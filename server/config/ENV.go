@@ -3,6 +3,7 @@ package config
 import (
 	"log"
 	"os"
+	"strings"
 
 	"github.com/joho/godotenv"
 )
@@ -37,6 +38,7 @@ func GetJWTSecret() string {
 	return os.Getenv("JWT_SECRET")
 }
 
-func GetCORS() string {
-	return os.Getenv("CORS")
+func GetCORS() []string {
+	cors := os.Getenv("CORS")
+	return strings.Split(cors, ",")
 }
